@@ -3,7 +3,7 @@ package com.investec.transactions.controller.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Client {
-
+    private long id;
     private String firstName;
     private String lastName;
     private String fullName;
@@ -12,15 +12,6 @@ public class Client {
     private String physicalAddress;
 
     public Client() {
-    }
-
-    public Client(Client client) {
-        this.firstName = client.getFirstName();
-        this.lastName = client.getLastName();
-        this.fullName = client.getFullName();
-        this.mobileNumber = client.getMobileNumber();
-        this.idNumber = client.getIdNumber();
-        this.physicalAddress = client.getPhysicalAddress();
     }
 
     public String getFirstName() {
@@ -69,6 +60,14 @@ public class Client {
 
     public void setPhysicalAddress(String physicalAddress) {
         this.physicalAddress = physicalAddress;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
