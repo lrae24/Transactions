@@ -1,5 +1,7 @@
 package com.investec.transactions.controller;
 
+import com.investec.transactions.controller.model.Client;
+import io.micrometer.core.instrument.util.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +15,8 @@ public class ClientController {
     }
 
     @PostMapping("/client")
-    public String addClient(){
-        return "Post Method";
+    public String addClient(@RequestBody Client client){
+        return client.toString();
     }
 
     @PutMapping("/client")
