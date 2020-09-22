@@ -1,8 +1,11 @@
 package com.investec.transactions.controller.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ClientRequest {
+import com.investec.transactions.domain.Client;
+
+import java.util.List;
+
+public class ClientModel {
     private long id;
     private String firstName;
     private String lastName;
@@ -11,7 +14,16 @@ public class ClientRequest {
     private String idNumber;
     private String physicalAddress;
 
-    public ClientRequest() {
+    private List<TransactionModel> transaction;
+
+    public ClientModel(Client client) {
+        this.id = client.getId();
+        this.firstName = client.getFirstName();
+        this.lastName = client.getLastName();
+        this.fullName = client.getFullName();
+        this.mobileNumber = client.getMobileNumber();
+        this.idNumber = client.getIdNumber();
+        this.physicalAddress = client.getPhysicalAddress();
     }
 
     public String getFirstName() {
@@ -68,6 +80,14 @@ public class ClientRequest {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<TransactionModel> getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(List<TransactionModel> transaction) {
+        this.transaction = transaction;
     }
 
     @Override

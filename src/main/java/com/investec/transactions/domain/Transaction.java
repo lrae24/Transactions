@@ -1,5 +1,7 @@
 package com.investec.transactions.domain;
 
+import com.investec.transactions.controller.model.TransactionModel;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,21 @@ public class Transaction {
     @Column
     private double transactionAmount;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="clientId")
+    private long clientId;
+
+    public Transaction(String clientName, double transactionAmount) {
+        this.clientName = clientName;
+        this.transactionAmount = transactionAmount;
+    }
+
+    public Transaction(TransactionModel trasnaction, Client client) {
+        this.clientName = trasnaction.getClientName();
+        this.transactionAmount = trasnaction.getTransactionAmount();
+        this.clientId = client.getId();
+    }
+
     public String getClientName() {
         return clientName;
     }
@@ -29,5 +46,21 @@ public class Transaction {
 
     public void setTransactionAmount(double transactionAmount) {
         this.transactionAmount = transactionAmount;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
     }
 }

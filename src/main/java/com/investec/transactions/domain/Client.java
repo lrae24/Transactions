@@ -1,5 +1,7 @@
 package com.investec.transactions.domain;
 
+import com.investec.transactions.controller.model.ClientModel;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class Client {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long clientId;
     @Column
     private String firstName;
     @Column
@@ -22,8 +24,9 @@ public class Client {
     @Column
     private String physicalAddress;
 
-    public Client(com.investec.transactions.controller.model.Client client) {
-        this.id = client.getId();
+
+    public Client(ClientModel client) {
+        this.clientId = client.getId();
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.fullName = client.getFullName();
@@ -81,10 +84,10 @@ public class Client {
     }
 
     public long getId() {
-        return id;
+        return clientId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long clientId) {
+        this.clientId = clientId;
     }
 }
