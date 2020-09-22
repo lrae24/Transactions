@@ -19,7 +19,7 @@ public class Transaction {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="clientId")
-    private long clientId;
+    private Client clientId;
 
     public Transaction(String clientName, double transactionAmount) {
         this.clientName = clientName;
@@ -29,7 +29,7 @@ public class Transaction {
     public Transaction(TransactionModel trasnaction, Client client) {
         this.clientName = trasnaction.getClientName();
         this.transactionAmount = trasnaction.getTransactionAmount();
-        this.clientId = client.getId();
+        this.clientId = client;
     }
 
     public String getClientName() {
@@ -56,11 +56,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public long getClientId() {
+    public Client getClientId() {
         return clientId;
     }
 
-    public void setClientId(long clientId) {
+    public void setClientId(Client clientId) {
         this.clientId = clientId;
     }
 }
