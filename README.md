@@ -9,8 +9,7 @@ For building and running the application you need:
 # Running the application locally
  To run the application locally you need to run the following command in your terminal:
  
-```gradle bootrun
-```
+"gradle bootrun"
 
 This will start the application on port 19000 of the host machine: http://localhost:19000/
 
