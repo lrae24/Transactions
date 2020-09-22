@@ -2,7 +2,7 @@ package com.investec.transactions.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Client {
+public class ClientRequest {
     private long id;
     private String firstName;
     private String lastName;
@@ -11,7 +11,7 @@ public class Client {
     private String idNumber;
     private String physicalAddress;
 
-    public Client() {
+    public ClientRequest() {
     }
 
     public String getFirstName() {
@@ -72,7 +72,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "ClientRequest{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", fullName='" + fullName + '\'' +

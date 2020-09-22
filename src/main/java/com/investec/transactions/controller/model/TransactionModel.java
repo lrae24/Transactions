@@ -1,6 +1,6 @@
 package com.investec.transactions.controller.model;
 
-public class Transactions {
+public class TransactionRESTModel {
 
     private String clientName;
     private double transactionAmount;
