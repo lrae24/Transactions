@@ -2,12 +2,22 @@ package com.investec.transactions.controller.model;
 
 import com.investec.transactions.domain.Transaction;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class TransactionModel {
 
 
     private long transactionId;
-    private String clientName;
+    @NotNull(message = "Client name must not be null")
+    @NotBlank(message = "Client name must not be empty")
+     private String clientName;
+    @NotNull(message = "Transaction amount must not be null")
+    @NotBlank(message = "Transaction amount must not be empty")
     private double transactionAmount;
+
+    public TransactionModel() {
+    }
 
     public TransactionModel(Transaction dbTransaction) {
         this.transactionId = dbTransaction.getId();
@@ -37,5 +47,13 @@ public class TransactionModel {
 
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", transactionAmount=" + transactionAmount +
+                '}';
     }
 }

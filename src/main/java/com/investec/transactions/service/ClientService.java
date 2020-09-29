@@ -29,17 +29,6 @@ public class ClientService {
 
     public Response isClientModelValid(ClientModel client){
         String message = null;
-        if(StringUtils.isEmpty(client.getFirstName())){
-            return new Response("Please enter a First Name number");
-        } else
-
-        if(StringUtils.isEmpty(client.getLastName())){
-            return new Response( "Please enter a  Last Name");
-        } else
-
-        if(StringUtils.isEmpty(client.getIdNumber())){
-            return new Response( "Please enter a id number");
-        }
 
         if(!validations.isIdValid(client.getIdNumber())){
             return new Response( "Please enter a valid SA ID number");
@@ -82,17 +71,21 @@ public class ClientService {
             user = new ClientModel(dbUser);
             List<TransactionModel> currentTransactions = new ArrayList<>();
             List<Transaction> allUserTransactions = transactionRepository.findByClientName(firstName);
-            for(Transaction t: allUserTransactions){
-                currentTransactions.add(new TransactionModel(t));
+            if(allUserTransactions.isEmpty()){
+                user.setTransaction(null);
+            } else {
+                for (Transaction t : allUserTransactions) {
+                    currentTransactions.add(new TransactionModel(t));
+                }
+                user.setTransaction(currentTransactions);
             }
-            user.setTransaction(currentTransactions);
         }
         return user;
     }
 
 
-    public Response removeClient(String idNumber){
-      Client user =  clientRepository.findByIdNumber(idNumber);
+    public Response removeClient(String mobileNumber){
+      Client user =  clientRepository.findByMobileNumber(mobileNumber);
       clientRepository.deleteById(user.getId());
       return new Response("Client has been deleted");
     }

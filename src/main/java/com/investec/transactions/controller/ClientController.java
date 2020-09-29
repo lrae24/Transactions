@@ -6,7 +6,10 @@ import com.investec.transactions.service.ClientService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -16,16 +19,16 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping("/client")
-    @ApiOperation(httpMethod = "GET", value = "Retreive Client", response = Response.class)
+    @ApiOperation(httpMethod = "GET", value = "Retreive Client", response = ClientModel.class)
     @ResponseStatus(HttpStatus.FOUND)
-    public ClientModel findClient(@RequestParam(required = false, name="name") String firstName, @RequestParam(required = false, name="idNumber") String idNumber, @RequestParam(required = false, name="mobileNumber") String mobileNumber){
-        return clientService.retrieveClient(firstName,idNumber,mobileNumber);
+    public String findClient(@RequestParam(required = false, name="name") String firstName, @RequestParam(required = false, name="idNumber") String idNumber, @RequestParam(required = false, name="mobileNumber") String mobileNumber){
+        return clientService.retrieveClient(firstName,idNumber,mobileNumber).toString();
     }
 
     @PostMapping("/client")
     @ApiOperation(httpMethod = "POST", value = "Create Client", response = Response.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public String addClient(@RequestBody ClientModel clientModel) {
+    public String addClient(@RequestBody @Valid ClientModel clientModel) {
         Response response = clientService.isClientModelValid(clientModel);
       return response.getMessage();
     }
@@ -33,16 +36,15 @@ public class ClientController {
     @PutMapping("/client")
     @ApiOperation(httpMethod = "PUT", value = "Update Client", response = Response.class)
     @ResponseStatus(HttpStatus.OK)
-    public Response updateClient(ClientModel client){
+    public Response updateClient(@RequestBody  @Valid ClientModel client){
         return clientService.updateClient(client);
     }
 
     @DeleteMapping("/client")
-
     @ApiOperation(httpMethod = "DELETE", value = "Remove Client", response = Response.class)
     @ResponseStatus(HttpStatus.OK)
-    public Response removeClient(String idNumber){
-     return   clientService.removeClient(idNumber);
+    public Response removeClient( @RequestParam(required = false, name="mobileNumber") String mobileNumber){
+     return  clientService.removeClient(mobileNumber);
     }
 
 

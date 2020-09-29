@@ -21,6 +21,9 @@ public class Transaction {
     @JoinColumn(name="clientId")
     private Client clientId;
 
+    public Transaction() {
+    }
+
     public Transaction(String clientName, double transactionAmount) {
         this.clientName = clientName;
         this.transactionAmount = transactionAmount;

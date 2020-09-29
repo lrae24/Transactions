@@ -24,6 +24,8 @@ public class Client {
     @Column
     private String physicalAddress;
 
+    public Client() {
+    }
 
     public Client(ClientModel client) {
         this.clientId = client.getId();

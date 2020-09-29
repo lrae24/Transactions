@@ -3,18 +3,30 @@ package com.investec.transactions.controller.model;
 
 import com.investec.transactions.domain.Client;
 
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class ClientModel {
     private long id;
+    @NotNull(message = "First Name must not be null")
+    @NotBlank(message = "First Name must not be empty")
     private String firstName;
+    @NotNull(message = "Last Name must not be null")
+    @NotBlank(message = "Last Name must not be empty")
     private String lastName;
     private String fullName;
     private String mobileNumber;
+    @NotNull(message = "ID Number must not be null")
+    @NotBlank(message = "ID Number must not be empty")
     private String idNumber;
     private String physicalAddress;
 
     private List<TransactionModel> transaction;
+
+    public ClientModel() {
+    }
 
     public ClientModel(Client client) {
         this.id = client.getId();
@@ -92,13 +104,15 @@ public class ClientModel {
 
     @Override
     public String toString() {
-        return "ClientRequest{" +
-                "firstName='" + firstName + '\'' +
+        return "ClientModel{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", idNumber='" + idNumber + '\'' +
                 ", physicalAddress='" + physicalAddress + '\'' +
+                ", transaction=" + transaction.toString() +
                 '}';
     }
 }

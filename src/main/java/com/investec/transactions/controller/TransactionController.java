@@ -20,8 +20,7 @@ public class TransactionController {
 
 
     @GetMapping("/transaction")
-
-    @ApiOperation(httpMethod = "GET", value = "Retreive Transaction", response = Response.class)
+    @ApiOperation(httpMethod = "GET", value = "Retreive Transaction", response = TransactionModel.class)
     @ResponseStatus(HttpStatus.FOUND)
     public List<TransactionModel> findTransaction(@RequestParam(required = false, name="name") String firstName){
         return transactionService.retrieveTransactions(firstName);

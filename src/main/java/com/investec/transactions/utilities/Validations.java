@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class Validations {
 
     public boolean isMobileNumberValid(String number){
-        if(number.matches("^\\[+27][0-9]{9}$") || number.matches("^\\[0][0-9]{9}$")  ){
+        if(!number.matches("^\\[+27|0][0-9]{9}$")){
             return true;
         } else {
             return false;
