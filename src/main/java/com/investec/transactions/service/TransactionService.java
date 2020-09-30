@@ -46,6 +46,9 @@ public class TransactionService {
         if (savedTransaction == null) {
             return new Response("Could not find treansaction to update");
         } else {
+            Transaction oldTransaction = savedTransaction.get();
+            oldTransaction.setClientName(transaction.getClientName());
+            oldTransaction.setTransactionAmount(transaction.getTransactionAmount());
             transactionRepository.save(savedTransaction.get());
         }
         return new Response("Transaction successfully updated");
@@ -56,6 +59,7 @@ public class TransactionService {
         if (savedTransaction == null) {
             return new Response("Could not find treansaction to update");
         } else{
+
             transactionRepository.deleteById(transaction.getTransactionId());
         }
         return new Response("Transaction successfully deleted");
