@@ -6,7 +6,6 @@ import com.investec.transactions.service.ClientService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,7 +28,7 @@ public class ClientController {
     @ApiOperation(httpMethod = "POST", value = "Create Client", response = Response.class)
     @ResponseStatus(HttpStatus.CREATED)
     public String addClient(@RequestBody @Valid ClientModel clientModel) {
-        Response response = clientService.isClientModelValid(clientModel);
+        Response response = clientService.saveClient(clientModel);
       return response.getMessage();
     }
 

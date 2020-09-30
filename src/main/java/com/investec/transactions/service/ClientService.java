@@ -27,7 +27,7 @@ public class ClientService {
     @Autowired
     TransactionRepository transactionRepository;
 
-    public Response isClientModelValid(ClientModel client){
+    public Response saveClient(ClientModel client){
         String message = null;
 
         if(!validations.isIdValid(client.getIdNumber())){
@@ -101,9 +101,16 @@ public class ClientService {
 
     public Response updateClient(ClientModel client){
         Client user =  clientRepository.findByMobileNumber(client.getMobileNumber());
+
         if(user == null){
             return new Response("No Client found to update");
         } else{
+            user.setFirstName(client.getFirstName());
+            user.setFullName(client.getFullName());
+            user.setLastName(client.getLastName());
+            user.setIdNumber(client.getIdNumber());
+            user.setMobileNumber(client.getMobileNumber());
+            user.setPhysicalAddress(client.getPhysicalAddress());
             clientRepository.save(user);
             return new Response("Client Updated Successfully");
         }
