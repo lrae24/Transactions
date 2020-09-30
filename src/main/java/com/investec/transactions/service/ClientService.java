@@ -54,9 +54,10 @@ public class ClientService {
         return new Response(message);
     }
 
-    public ClientModel retrieveClient(String firstName, String idNumber, String mobileNumber){
+    public String retrieveClient(String firstName, String idNumber, String mobileNumber){
         ClientModel user = null;
         Client dbUser = null;
+        Boolean doesuUserHaveTransactions = false;
         if(!StringUtils.isBlank(firstName) && !StringUtils.isBlank(idNumber) && !StringUtils.isBlank(mobileNumber)) {
              dbUser = clientRepository.findByFirstNameAndIdNumberAndMobileNumber(firstName, idNumber, mobileNumber);
         } else if(!StringUtils.isBlank(firstName)) {
@@ -74,13 +75,21 @@ public class ClientService {
             if(allUserTransactions.isEmpty()){
                 user.setTransaction(null);
             } else {
+                 doesuUserHaveTransactions = true;
+
                 for (Transaction t : allUserTransactions) {
                     currentTransactions.add(new TransactionModel(t));
                 }
                 user.setTransaction(currentTransactions);
             }
         }
-        return user;
+
+        if(doesuUserHaveTransactions){
+            return user.toString();
+        } else{
+            return user.toString2();
+        }
+
     }
 
 
@@ -91,9 +100,13 @@ public class ClientService {
     }
 
     public Response updateClient(ClientModel client){
-        Client user = new Client(client);
-        clientRepository.save(user);
-        return new Response("Client Updated Successfully");
+        Client user =  clientRepository.findByMobileNumber(client.getMobileNumber());
+        if(user == null){
+            return new Response("No Client found to update");
+        } else{
+            clientRepository.save(user);
+            return new Response("Client Updated Successfully");
+        }
     }
 
 }

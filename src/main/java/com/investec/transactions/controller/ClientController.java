@@ -22,7 +22,7 @@ public class ClientController {
     @ApiOperation(httpMethod = "GET", value = "Retreive Client", response = ClientModel.class)
     @ResponseStatus(HttpStatus.FOUND)
     public String findClient(@RequestParam(required = false, name="name") String firstName, @RequestParam(required = false, name="idNumber") String idNumber, @RequestParam(required = false, name="mobileNumber") String mobileNumber){
-        return clientService.retrieveClient(firstName,idNumber,mobileNumber).toString();
+        return clientService.retrieveClient(firstName,idNumber,mobileNumber);
     }
 
     @PostMapping("/client")

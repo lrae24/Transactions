@@ -115,4 +115,16 @@ public class ClientModel {
                 ", transaction=" + transaction.toString() +
                 '}';
     }
+
+    public String toString2() {
+        return "ClientModel{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", physicalAddress='" + physicalAddress + '\''+
+                '}';
+    }
 }
